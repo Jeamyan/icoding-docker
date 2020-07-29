@@ -13,9 +13,6 @@ pipeline{
           sh 'pwd'
           sh 'ls'
           sh 'echo 666'
-          mail to: '896077954@qq.com',
-            subject: "${env.JOB_NAME}-${env.BUILD_NUMBER} 构建成功",
-            body: "${env.BRANCH_NAME}分支构建成功 ${env.BUILD_URL}"
         }
       }
 
@@ -23,6 +20,9 @@ pipeline{
         agent any
         steps {
             sh 'echo 111'
+            mail to: '896077954@qq.com',
+                subject: "${env.JOB_NAME}-${env.BUILD_NUMBER} 构建成功",
+                body: "${env.BRANCH_NAME}分支构建成功 ${env.BUILD_URL}"
         }
       }
 
