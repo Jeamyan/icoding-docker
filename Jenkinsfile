@@ -1,19 +1,29 @@
 pipeline{
     agent none
-    stages{
-        stage('项目构建'){
-            agent {
-                docker{
-                    image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'
-                }
-            }
-            stages {
-                sh 'echo 123'
-            }
+    stages {
+      stage('maven项目构建') {
+        steps {
+          sh label: '', script: 'mvn -gs settings.xml clean package -Dmaven.test.skip=true'
+          sh 'pwd'
+          sh 'ls'
+          sh 'echo 666'
         }
-        stage('项目测试'){
-            agent any
+
+        agent {
+          docker {
+            args '-v /root/.m2:/root/.m2'
+            image 'maven:3-alpine'
+          }
         }
+      }
+
+      stage('dockers 环境构建') {
+        agent any
+        steps {
+          // One or more steps need to be included within the steps block.
+        }
+      }
+
     }
+
 }
