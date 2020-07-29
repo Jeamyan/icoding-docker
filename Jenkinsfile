@@ -21,7 +21,6 @@ pipeline{
         agent any
         steps {
             sh 'echo 111'
-          // One or more steps need to be included within the steps block.
         }
       }
 
